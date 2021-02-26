@@ -14,7 +14,6 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
-  <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
   <meta name="theme-color" content="#fafafa">
@@ -28,6 +27,43 @@
 
 
     <div id="q-app">
+        <div>
+            <div class="row no-wrap">
+            <q-toolbar class="col-9 bg-orange text-white">
+                <q-btn flat round dense icon="assignment_ind" />
+                <q-toolbar-title>
+                  Toolbar
+                </q-toolbar-title>
+            </q-toolbar>
+            <q-toolbar  class="toolbar-align-right col-3 bg-grey-3 text-grey-9 text-right">
+
+                <q-btn flat round dense icon="apps" class="q-mr-xs" />
+                <q-btn flat round dense icon="more_vert" />
+            </q-toolbar>
+            </div>
+            <!-- <q-toolbar class="text-primary">
+                <q-btn flat round dense icon="menu" />
+                <q-toolbar-title>
+                  Toolbar
+                </q-toolbar-title>
+                <q-btn flat round dense icon="more_vert" />
+              </q-toolbar> -->
+            <!-- <q-toolbar class="bg-orange text-white shadow-2">
+              <q-btn flat round dense icon="menu" class="q-mr-sm" />
+        
+              <div class="q-pl-md q-gutter-sm row no-wrap items-center">
+              <q-btn round flat>
+                    <q-avatar size="26px">
+                    <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+                    </q-avatar>
+                    <q-tooltip>Account</q-tooltip>
+                </q-btn>
+                </div>
+            </q-toolbar> -->
+        </div>
+        <div id="website-body">
+            
+
         <div class="text-center q-mt-xl q-pa-xl">
             <img src="logo-fintech.png"/>
         </div>
@@ -97,7 +133,7 @@
                 </q-list>
             </div>
             <div class="col-4">
-                <q-btn label="" size="lg" text-color="white" color="orange" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 60px;" src="logo-bank.png"/> </q-btn>
+                <q-btn label="" size="lg" text-color="white" color="blue-10" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 60px;" src="logo-bank.png"/> </q-btn>
             </div>
         </div>
         
@@ -111,7 +147,7 @@
             <div class="row q-py-lg">
                 <div class="col-12">
                     <div>
-                        <q-btn label="Obter contas" size="md" text-color="white"  class="q-mt-md" color="orange" @click="getAccounts"></q-btn>
+                        <q-btn label="Obter contas" size="md" text-color="white"  class="q-mt-md" color="blue-10" @click="getAccounts"></q-btn>
                       </div>
                     </div>
             </div>
@@ -194,6 +230,7 @@
                 </div>
                 
         </div>
+    </div>
         <div class="q-py-xl"></div>
     </div>
 
@@ -204,6 +241,7 @@
       el: '#q-app',
       data: function () {
         return {
+            leftDrawerOpen: true,
             clientId: 'E7QDJ0EGjCEJGDdjXwgSRK1D48ca',
             grantType: 'authorization_code',
             clientAssertionType: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
@@ -221,18 +259,7 @@
                 REDIRECT_URL: "",
                 REQUEST_AUTH_TOKEN: "",
                 WSO2_PORTAL_BASE_URL: ""
-            },
-            columns: [
-                {
-                name: 'name',
-                required: true,
-                label: 'Dessert (100g serving)',
-                align: 'left',
-                field: row => row.name,
-                format: val => `${val}`,
-                sortable: true
-                }
-            ]
+            }
         }
       },
       methods: {
@@ -324,9 +351,20 @@
 </body>
 <style>
     #q-app {
-        margin: auto;
-        width:  60vw;
+        width:  100vw;
     }
+
+    #website-body {
+        width: 60%;
+        margin: auto;
+    }
+
+    .toolbar-align-right {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
 </style>
 
 </html>
