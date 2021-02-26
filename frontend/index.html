@@ -150,6 +150,26 @@
                         <q-btn label="Obter contas" size="md" text-color="white"  class="q-mt-md" color="blue-10" @click="getAccounts"></q-btn>
                       </div>
                     </div>
+
+                <div class="col-12">
+                    <div>
+                        <q-btn label="Obter Saldo" size="md" text-color="white"  class="q-mt-md" color="orange" @click="getBalance"></q-btn>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row q-py-lg">
+                <div class="col-12">
+                    <pre>
+                        {{accounts}}
+                    </pre>
+                </div>
+
+                <div class="col-12">
+                    <pre>
+                        {{balance}}
+                    </pre>
+                </div>
             </div>
             
             <div class="row">
@@ -253,6 +273,9 @@
             idToken: '',
             loggedIn: false,
             client_assertion: "",
+            access_token: "",
+            accounts: "",
+            balance: "",
             envVariables: {
                 AUDIENCE: "",
                 CLIENT_ID: "",
@@ -267,13 +290,32 @@
             window.location.href = `https://localhost:8243/authorize?prompt=login&state=state&response_type=code id_token&client_id=${this.clientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}&request=${this.requestToken}`
           },
 
-          getAccounts(tokenData) {
+          
+          getBalance() {
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + this.access_token
+                }
+            }
 
+            axios.get("http://localhost:8001/balance", config).then(response => {
+                this.balance = response.data
+            })
+          },
+          
+          getAccounts() {
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + this.access_token
+                }
+            }
+
+            axios.get("http://localhost:8001/accounts", config).then(response => {
+                this.accounts = response.data
+            })
           },
 
           getToken() {
-
-
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             var code = urlParams.get("code");
@@ -300,13 +342,12 @@
             axios.post('http://localhost:8001/sign-token', data, config)
             .then((response) => {
                 console.log(response.data)
+                this.access_token = response.data.access_token
                 this.client_assertion = response.data.client_assertion
             })
             .catch((err) => {
                 console.log(err)
             })
-
-
           },
 
           getEnvVariables(){

@@ -99,6 +99,24 @@ module.exports = (app) => {
             });
   })
 
+
+    app.get("/accounts", (req, res) =>  {
+      const config = {
+        headers: { 
+          'x-v': '1',
+          'Authorization': req.header('Authorization')
+        }
+      }
+      
+      instance.get("/cds-au/v1/banking/accounts", config).then(response => {
+        res.status(200)
+        res.json(response.data)
+      }).catch(error => {
+        console.log(error)
+        res.status(400)
+      })
+    })
+  
     app.get("/balance", (req, res) => {
 
       console.log(req.header('Authorization'));
