@@ -7,6 +7,6 @@ services:
     ports:
       - "8081:80"
   tpp-backend:
-    image: tpp-backend
+    build: './backend'
     ports:
       - "8001:8001"

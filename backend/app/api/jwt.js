@@ -2,9 +2,10 @@ var jose = require('node-jose');
 const https = require('https')
 const axios = require('axios');
 const fs = require('fs');
+require('dotenv').config()
 
 const instance = axios.create({
-  baseURL: 'https://host.docker.internal:8243',
+  baseURL: process.env.WSO2_API_BASE_URL,
   httpsAgent: new https.Agent({
     pfx: fs.readFileSync('tpp1.p12'),
     rejectUnauthorized: false,
@@ -14,13 +15,13 @@ const instance = axios.create({
 
 module.exports = (app) => {
 
-  app.post("/signToken", async (req, res) =>  {
+  app.post("/sign-token", async (req, res) =>  {
 
             // Builts JWT Payload
             var bodyCnt = {
-              sub: "E7QDJ0EGjCEJGDdjXwgSRK1D48ca",
-              aud: 'https://localhost:8243/token',
-              iss: "E7QDJ0EGjCEJGDdjXwgSRK1D48ca",
+              sub: process.env.CLIENT_ID,
+              aud: process.env.AUDIENCE,
+              iss: process.env.CLIENT_ID,
               exp: Math.floor(Date.now() / 1000) + (60 * 60),
               jti: Math.floor(Date.now() / 1000) + (60 * 60) + "",
               iat: Math.floor(Date.now() / 1000) - 30
@@ -64,12 +65,12 @@ module.exports = (app) => {
                 // ## ACCESS_TOKEN /token request
                 // Builds request Parameters
                 const params = new URLSearchParams()
-                params.append('client_id', 'E7QDJ0EGjCEJGDdjXwgSRK1D48ca')
+                params.append('client_id', process.env.CLIENT_ID)
                 params.append('grant_type', 'authorization_code')
                 params.append('code', req.body.authorizationCode)
                 params.append('client_assertion_type', 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer')
                 params.append('scope', 'openid bank:accounts.basic:read bank:accounts.detail:read bank:transactions:read')
-                params.append('redirect_uri', 'http://localhost:8081')
+                params.append('redirect_uri', process.env.REDIRECT_URL)
                 params.append('client_assertion', generatedToken)
 
                 console.log(generatedToken)
@@ -119,5 +120,18 @@ module.exports = (app) => {
         console.log(error)
         res.status(400)
       })
+    })
+
+
+    app.get("/environment-variables", async (req, res) =>  {
+      const envVariables = {
+        CLIENT_ID: process.env.CLIENT_ID,
+        AUDIENCE: process.env.AUDIENCE,
+        REDIRECT_URL: process.env.REDIRECT_URL,
+        REQUEST_AUTH_TOKEN: process.env.REQUEST_AUTH_TOKEN,
+        WSO2_PORTAL_BASE_URL: process.env.WSO2_PORTAL_BASE_URL
+      }
+      res.status(200)
+      res.json(envVariables)
     })
   }
