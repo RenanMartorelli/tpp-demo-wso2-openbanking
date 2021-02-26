@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  tppui:
+    image: nginx:1.19
+    volumes:
+      - ./frontend/:/usr/share/nginx/html:ro
+    ports:
+      - "8081:80"
+  tpp-backend:
+    image: tpp-backend
+    ports:
+      - "8001:8001"

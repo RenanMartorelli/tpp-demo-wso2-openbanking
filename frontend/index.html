@@ -1,0 +1,422 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@1.15.0/dist/quasar.min.css" rel="stylesheet" type="text/css">
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.0/dist/quasar.umd.modern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://kaizhu256.github.io/node-jose-lite/build..beta..travis-ci.org/app/assets.jose.js"></script>
+
+
+    <div id="q-app">
+        <div class="text-center q-mt-xl q-pa-xl">
+            <img src="logo-fintech.png"/>
+        </div>
+        
+
+        <div class="row" v-if="!loggedIn">
+            <div class="col-8 q-px-md">
+                <q-list bordered class="rounded-borders">
+                    <q-expansion-item
+                      expand-separator
+                      label="Detalhes da requisição"
+                      class="bg-grey-1"
+                    >
+                      <q-card class="bg-grey-1">
+                        <q-card-section>
+                            <div class="row q-py-sm">
+                                <div class="col-12">
+                                    <q-input
+                                        dense
+                                        outlined
+                                        color="blue"
+                                        v-model="clientId"
+                                        type="text"
+                                        label="Client ID"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row q-py-sm">
+                                <div class="col-12">
+                                    <q-input
+                                        dense
+                                        outlined
+                                        color="blue"
+                                        v-model="grantType"
+                                        type="text"
+                                        label="Grant Type"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row q-py-sm">
+                                <div class="col-12">
+                                    <q-input
+                                        dense
+                                        outlined
+                                        color="blue"
+                                        v-model="scope"
+                                        type="text"
+                                        label="Request scope"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row q-py-sm">
+                                <div class="col-12">
+                                    <q-input
+                                        dense
+                                        outlined
+                                        color="blue"
+                                        v-model="requestToken"
+                                        type="text"
+                                        label="Request token"
+                                    />
+                                </div>
+                            </div>
+                        </q-card-section>
+                      </q-card>
+                    </q-expansion-item>
+                </q-list>
+            </div>
+            <div class="col-4">
+                <q-btn label="" size="lg" text-color="white" color="orange" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 60px;" src="logo-bank.png"/> </q-btn>
+            </div>
+        </div>
+        
+
+        <di v-if="loggedIn">
+            <div class="row" >
+                <h3 class="q-my-none">Área do cliente</h3>
+            </div>
+
+            
+            <div class="row q-py-lg">
+                <div class="col-12">
+                    <div>
+                        <q-btn label="Obter contas" size="md" text-color="white"  class="q-mt-md" color="orange" @click="getAccounts"></q-btn>
+                      </div>
+                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-8">
+                    <q-list bordered class="rounded-borders">
+                        <q-expansion-item
+                        expand-separator
+                        label="Detalhes da obtenção do Token"
+                        class="bg-grey-1"
+                        >
+                        <q-card class="bg-grey-1">
+                            <q-card-section>
+                                <div class="row q-py-sm">
+                                    <div class="col-12">
+                                        <q-input
+                                            dense
+                                            outlined
+                                            color="blue"
+                                            v-model="authorizationCode"
+                                            type="text"
+                                            label="Authorization Code"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row q-py-sm">
+                                    <div class="col-12">
+                                        <q-input
+                                            dense
+                                            outlined
+                                            color="blue"
+                                            v-model="idToken"
+                                            type="text"
+                                            label="ID Token"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row q-py-sm">
+                                    <div class="col-12">
+                                        <q-input
+                                            dense
+                                            outlined
+                                            color="blue"
+                                            v-model="scope"
+                                            type="text"
+                                            label="Request scope"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row q-py-sm">
+                                    <div class="col-12">
+                                        <q-input
+                                            dense
+                                            outlined
+                                            color="blue"
+                                            v-model="requestToken"
+                                            type="text"
+                                            label="Request token"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row q-py-sm">
+                                    <div class="col-12">
+                                        <q-input
+                                            dense
+                                            outlined
+                                            color="blue"
+                                            v-model="client_assertion"
+                                            type="text"
+                                            label="Client Assertion"
+                                        />
+                                    </div>
+                                </div>
+                            </q-card-section>
+                        </q-card>
+                        </q-expansion-item>
+                    </q-list>
+                </div>
+                </div>
+                
+        </div>
+        <div class="q-py-xl"></div>
+    </div>
+
+
+  <script>
+
+    new Vue({
+      el: '#q-app',
+      data: function () {
+        return {
+            clientId: 'E7QDJ0EGjCEJGDdjXwgSRK1D48ca',
+            grantType: 'authorization_code',
+            clientAssertionType: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+            redirectUri: 'http://localhost:8081',
+            requestToken: 'eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkR3TUtkV01tajdQV2ludm9xZlF5WFZ6eVo2UWMifQ.eyJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo4MjQzL3Rva2VuIiwicmVzcG9uc2VfdHlwZSI6ImNvZGUgaWRfdG9rZW4iLCJjbGllbnRfaWQiOiJFN1FESjBFR2pDRUpHRGRqWHdnU1JLMUQ0OGNhIiwicmVkaXJlY3RfdXJpIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwic3RhdGUiOiJhZjBpZmpzbGRraiIsIm5vbmNlIjoibi0wUzZfV3pBMk1qIiwiY2xhaW1zIjp7InNoYXJpbmdfZHVyYXRpb24iOiI3MjAwIiwiaWRfdG9rZW4iOnsiYWNyIjp7ImVzc2VudGlhbCI6dHJ1ZSwidmFsdWVzIjpbInVybjpjZHMuYXU6Y2RyOjMiXX19LCJ1c2VyaW5mbyI6eyJnaXZlbl9uYW1lIjpudWxsLCJmYW1pbHlfbmFtZSI6bnVsbH19fQ.JKhZazDngh5z6BNN1p8SrONS3By7SFabnEsXHZ7VVdPcjRIWX15Lf7SZ1XYsXgE39eX_Ot8p67rRq9h88u3lD8Sfp2v8VUU3dUmXwNPUttWYuVrNlxCvGaza8CLOJ0UhfzZkN4EVc39us6_g3fo1AooOPx5aAohwAUT7iycVYtHJnZrofeTgyQ_IJXMJUpr7olUXcGsk_g9oVpgCPCfPxaAd9HX9EHJVR-Bx-YOfDwtQC_msizhKxmqmlbIeOZYPPI7EF8RgeUhGDIrkfCrZcjurU4-4Rzge6xGqoLa9ncLKJBGFfGKfYL64X032YIjcwwiDxFZLC7RRAy2IrDS5lg',
+            scope: 'openid bank:accounts.basic:read bank:accounts.detail:read bank:transactions:read',
+            privateKey: '',
+            authorizationCode: '',
+            idToken: '',
+            loggedIn: false,
+            client_assertion: "",
+            columns: [
+                {
+                name: 'name',
+                required: true,
+                label: 'Dessert (100g serving)',
+                align: 'left',
+                field: row => row.name,
+                format: val => `${val}`,
+                sortable: true
+                },
+                { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
+                { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
+                { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
+                { name: 'protein', label: 'Protein (g)', field: 'protein' },
+                { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
+                { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+                { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+            ],
+            data: [
+                {
+                name: 'Frozen Yogurt',
+                calories: 159,
+                fat: 6.0,
+                carbs: 24,
+                protein: 4.0,
+                sodium: 87,
+                calcium: '14%',
+                iron: '1%'
+                },
+                {
+                name: 'Ice cream sandwich',
+                calories: 237,
+                fat: 9.0,
+                carbs: 37,
+                protein: 4.3,
+                sodium: 129,
+                calcium: '8%',
+                iron: '1%'
+                },
+                {
+                name: 'Eclair',
+                calories: 262,
+                fat: 16.0,
+                carbs: 23,
+                protein: 6.0,
+                sodium: 337,
+                calcium: '6%',
+                iron: '7%'
+                },
+                {
+                name: 'Cupcake',
+                calories: 305,
+                fat: 3.7,
+                carbs: 67,
+                protein: 4.3,
+                sodium: 413,
+                calcium: '3%',
+                iron: '8%'
+                },
+                {
+                name: 'Gingerbread',
+                calories: 356,
+                fat: 16.0,
+                carbs: 49,
+                protein: 3.9,
+                sodium: 327,
+                calcium: '7%',
+                iron: '16%'
+                },
+                {
+                name: 'Jelly bean',
+                calories: 375,
+                fat: 0.0,
+                carbs: 94,
+                protein: 0.0,
+                sodium: 50,
+                calcium: '0%',
+                iron: '0%'
+                },
+                {
+                name: 'Lollipop',
+                calories: 392,
+                fat: 0.2,
+                carbs: 98,
+                protein: 0,
+                sodium: 38,
+                calcium: '0%',
+                iron: '2%'
+                },
+                {
+                name: 'Honeycomb',
+                calories: 408,
+                fat: 3.2,
+                carbs: 87,
+                protein: 6.5,
+                sodium: 562,
+                calcium: '0%',
+                iron: '45%'
+                },
+                {
+                name: 'Donut',
+                calories: 452,
+                fat: 25.0,
+                carbs: 51,
+                protein: 4.9,
+                sodium: 326,
+                calcium: '2%',
+                iron: '22%'
+                },
+                {
+                name: 'KitKat',
+                calories: 518,
+                fat: 26.0,
+                carbs: 65,
+                protein: 7,
+                sodium: 54,
+                calcium: '12%',
+                iron: '6%'
+                }
+            ]
+    
+        }
+      },
+      methods: {
+          authenticateRedirect() {
+            window.location.href = `https://localhost:8243/authorize?prompt=login&state=state&response_type=code id_token&client_id=${this.clientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}&request=${this.requestToken}`
+          },
+
+          getAccounts(tokenData) {
+
+          },
+
+          getToken() {
+
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var code = urlParams.get("code");
+            this.authorizationCode = code;
+
+            var idToken = urlParams.get("id_token");
+            this.idToken = idToken;
+
+            console.log(code)
+            console.log("--------------- \n")
+            console.log(idToken)
+            // const axios = require('axios');
+
+            data = {
+                "authorizationCode": code
+            }
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            axios.post('http://localhost:8001/signToken', data, config)
+            .then((response) => {
+                console.log(response.data)
+                this.client_assertion = response.data.client_assertion
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+
+          },
+
+          loggedPage() {
+            this.loggedIn = true
+            this.getToken();
+          }
+      },
+      async mounted () {
+        var currentUrl = window.location.href;
+          if(currentUrl.includes('#')){
+            var newUrl = currentUrl.replace("#","?")
+            window.location.href = newUrl
+          }
+
+        if(window.location.search != '') {
+            this.loggedPage()
+            // this.generateClientAssetionToken();
+        }
+
+      }
+      // ...etc
+    })
+  </script>
+
+
+</body>
+<style>
+    #q-app {
+        margin: auto;
+        width:  60vw;
+    }
+</style>
+
+</html>
+
+
+<!-- IAT hora de agora, Expiration: umas horas pra frente, JTI pode ser o timestamp-->
