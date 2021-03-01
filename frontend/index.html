@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>TPartyFinance - Demo</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
@@ -13,8 +13,7 @@
   <meta property="og:type" content="">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">  
   <!-- Place favicon.ico in the root directory -->
   <meta name="theme-color" content="#fafafa">
 </head>
@@ -29,14 +28,16 @@
     <div id="q-app">
         <div>
             <div class="row no-wrap">
-            <q-toolbar class="col-9 bg-orange text-white">
-                <q-btn flat round dense icon="assignment_ind" />
-                <q-toolbar-title>
-                  Toolbar
-                </q-toolbar-title>
+            <q-toolbar class="col-8 toolbar-orange bg-orange q-pa-xs text-white">
+                <img class="header-logo" src="logo-fintech-white.png"></img>
+                <q-tabs v-model="tab">
+                    <q-tab name="Produtos Financeiros" label="Produtos Financeiros"></q-tab>
+                    <q-tab name="Segurança" label="Segurança"></q-tab>
+                    <q-tab name="Contas" label="Contas"></q-tab>
+                  </q-tabs>
             </q-toolbar>
-            <q-toolbar  class="toolbar-align-right col-3 bg-grey-3 text-grey-9 text-right">
-
+            <q-toolbar  class="toolbar-align-right col-4 bg-grey-3 text-grey-9 text-right">
+                <span class="q-pr-md">Bem-vindo(a) João da Silva</span>
                 <q-btn flat round dense icon="apps" class="q-mr-xs" />
                 <q-btn flat round dense icon="more_vert" />
             </q-toolbar>
@@ -61,197 +62,264 @@
                 </div>
             </q-toolbar> -->
         </div>
-        <div id="website-body">
-            
-
         <div class="text-center q-mt-xl q-pa-xl">
-            <img src="logo-fintech.png"/>
+            <img class="body-logo" src="logo-fintech.png"/>
         </div>
-        
-
-        <div class="row" v-if="!loggedIn">
-            <div class="col-8 q-px-md">
-                <q-list bordered class="rounded-borders">
-                    <q-expansion-item
-                      expand-separator
-                      label="Detalhes da requisição"
-                      class="bg-grey-1"
-                    >
-                      <q-card class="bg-grey-1">
-                        <q-card-section>
-                            <div class="row q-py-sm">
+        <div class="bg-grey-2 q-py-lg">
+            <div class="website-body q-pb-xl">
+                
+            <div v-if="!loggedIn">
+                    <div class="row">
+                        <div class="col-5">
+                            <h4> Acessar contas</h4>
+                            <div class="row">
                                 <div class="col-12">
-                                    <q-input
-                                        dense
-                                        outlined
-                                        color="blue"
-                                        v-model="clientId"
-                                        type="text"
-                                        label="Client ID"
-                                    />
+                                    <q-btn label="" size="md" class="full-width" text-color="white" color="blue-6" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 70px;" src="logo-bank.png"/> </q-btn>
+                                </div>
+                                <div class="col-12 q-pt-md">
+                                    <q-btn label="Hilts Bank" size="md" class="full-width" text-color="white" color="deep-purple-6">  </q-btn>
+                                </div>
+                                <div class="col-12 q-pt-md">
+                                    <q-btn label="Bank of Plata" size="md" class="full-width" text-color="white" color="pink-6">  </q-btn>
+                                </div>
+                                <div class="col-12 q-pt-md">
+                                    <q-btn label="Either Bank" size="md" class="full-width" text-color="white" color="teal-6"> </q-btn>
                                 </div>
                             </div>
-                            <div class="row q-py-sm">
-                                <div class="col-12">
-                                    <q-input
-                                        dense
-                                        outlined
-                                        color="blue"
-                                        v-model="grantType"
-                                        type="text"
-                                        label="Grant Type"
-                                    />
+                        </div>
+                        <div class="col-6 q-ml-xl q-pl-xl">
+                            <h4> Adicionar Nova Conta</h4>
+                            <div class="row">
+                                <div class="col-2 q-pr-md">
+                                    <q-btn label="" class="full-width" icon="add" size="md" text-color="white" color="orange-6" @click="authenticateRedirect"></q-btn>
+                                </div>
+                                <div class="col-9">
+                                    <q-select outlined v-model="selectedBank" dense color="orange" :options="addBankOptions" label="Selecionar Banco" />
                                 </div>
                             </div>
-                            <div class="row q-py-sm">
-                                <div class="col-12">
-                                    <q-input
-                                        dense
-                                        outlined
-                                        color="blue"
-                                        v-model="scope"
-                                        type="text"
-                                        label="Request scope"
-                                    />
-                                </div>
-                            </div>
-                            <div class="row q-py-sm">
-                                <div class="col-12">
-                                    <q-input
-                                        dense
-                                        outlined
-                                        color="blue"
-                                        v-model="requestToken"
-                                        type="text"
-                                        label="Request token"
-                                    />
-                                </div>
-                            </div>
-                        </q-card-section>
-                      </q-card>
-                    </q-expansion-item>
-                </q-list>
-            </div>
-            <div class="col-4">
-                <q-btn label="" size="lg" text-color="white" color="blue-10" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 60px;" src="logo-bank.png"/> </q-btn>
-            </div>
-        </div>
-        
-
-        <di v-if="loggedIn">
-            <div class="row" >
-                <h3 class="q-my-none">Área do cliente</h3>
-            </div>
-
-            
-            <div class="row q-py-lg">
-                <div class="col-12">
-                    <div>
-                        <q-btn label="Obter contas" size="md" text-color="white"  class="q-mt-md" color="blue-10" @click="getAccounts"></q-btn>
-                      </div>
+                        </div>
                     </div>
-
-                <div class="col-12">
-                    <div>
-                        <q-btn label="Obter Saldo" size="md" text-color="white"  class="q-mt-md" color="orange" @click="getBalance"></q-btn>
+                    <div v-if="showRequestDetails" class="row q-mt-lg">
+                        <div class="col-12 q-pr-md">
+                            <q-list bordered class="rounded-borders">
+                                <q-expansion-item
+                                expand-separator
+                                label="Detalhes da requisição"
+                                class="bg-grey-1"
+                                >
+                                <q-card class="bg-grey-1">
+                                    <q-card-section>
+                                        <div class="row q-py-sm">
+                                            <div class="col-12">
+                                                <q-input
+                                                    dense
+                                                    outlined
+                                                    color="blue"
+                                                    v-model="clientId"
+                                                    type="text"
+                                                    label="Client ID"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row q-py-sm">
+                                            <div class="col-12">
+                                                <q-input
+                                                    dense
+                                                    outlined
+                                                    color="blue"
+                                                    v-model="grantType"
+                                                    type="text"
+                                                    label="Grant Type"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row q-py-sm">
+                                            <div class="col-12">
+                                                <q-input
+                                                    dense
+                                                    outlined
+                                                    color="blue"
+                                                    v-model="scope"
+                                                    type="text"
+                                                    label="Request scope"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row q-py-sm">
+                                            <div class="col-12">
+                                                <q-input
+                                                    dense
+                                                    outlined
+                                                    color="blue"
+                                                    v-model="requestToken"
+                                                    type="text"
+                                                    label="Request token"
+                                                />
+                                            </div>
+                                        </div>
+                                    </q-card-section>
+                                </q-card>
+                                </q-expansion-item>
+                            </q-list>
                         </div>
                     </div>
             </div>
 
-            <div class="row q-py-lg">
-                <div class="col-12">
-                    <pre>
-                        {{accounts}}
-                    </pre>
+
+            
+
+            <div v-if="loggedIn">
+                <div class="row" >
+                    <h4 class="q-my-none">Área do cliente</h4>
                 </div>
 
-                <div class="col-12">
-                    <pre>
-                        {{balance}}
-                    </pre>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-8">
-                    <q-list bordered class="rounded-borders">
-                        <q-expansion-item
-                        expand-separator
-                        label="Detalhes da obtenção do Token"
-                        class="bg-grey-1"
-                        >
-                        <q-card class="bg-grey-1">
+                <div class="row">
+                    <div class="col-12">
+                        <q-card flat bordered class="my-card bg-grey-1">
                             <q-card-section>
-                                <div class="row q-py-sm">
-                                    <div class="col-12">
-                                        <q-input
-                                            dense
-                                            outlined
-                                            color="blue"
-                                            v-model="authorizationCode"
-                                            type="text"
-                                            label="Authorization Code"
-                                        />
-                                    </div>
+                              <div class="row items-center no-wrap">
+                                <div class="col">
+                                  <div class="text-h6">Banco CBank</div>
+                                  <div class="text-subtitle2">João da Silva</div>
                                 </div>
-                                <div class="row q-py-sm">
-                                    <div class="col-12">
-                                        <q-input
-                                            dense
-                                            outlined
-                                            color="blue"
-                                            v-model="idToken"
-                                            type="text"
-                                            label="ID Token"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="row q-py-sm">
-                                    <div class="col-12">
-                                        <q-input
-                                            dense
-                                            outlined
-                                            color="blue"
-                                            v-model="scope"
-                                            type="text"
-                                            label="Request scope"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="row q-py-sm">
-                                    <div class="col-12">
-                                        <q-input
-                                            dense
-                                            outlined
-                                            color="blue"
-                                            v-model="requestToken"
-                                            type="text"
-                                            label="Request token"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="row q-py-sm">
-                                    <div class="col-12">
-                                        <q-input
-                                            dense
-                                            outlined
-                                            color="blue"
-                                            v-model="client_assertion"
-                                            type="text"
-                                            label="Client Assertion"
-                                        />
-                                    </div>
-                                </div>
+
+                      
+                                <img width="120px" src="logo-bank-black.png"/>
+                              </div>
                             </q-card-section>
-                        </q-card>
-                        </q-expansion-item>
-                    </q-list>
-                </div>
+                      
+                            <q-card-section class="q-pt-none">
+                              <q-btn label="Obter contas" size="md" outline text-color="grey-10"  class="q-mt-md" color="grey-2" @click="getAccounts"></q-btn>
+                              <q-btn label="Obter Saldo" size="md"  outline text-color="grey-10"  class="q-mt-md q-ml-md" color="grey-2" @click="getBalance"></q-btn>
+                            </q-card-section>
+                      
+                            <q-separator></q-separator>
+                            <q-card-section>
+                                <pre v-if="printedResponse != ''">
+                                {{ printedResponse }}
+                                </pre>
+                            </q-card-section>
+                          </q-card>
+                    </div>
                 </div>
                 
+                <div v-if="showRequestDetails" class="row q-mt-lg">
+                    <div class="col-12">
+                        <q-list bordered class="rounded-borders">
+                            <q-expansion-item
+                            expand-separator
+                            label="Detalhes da requisição"
+                            class="bg-grey-1"
+                            >
+                            <q-card class="bg-grey-1">
+                                <q-card-section>
+                                    <div class="row q-py-sm">
+                                        <div class="col-12">
+                                            <q-input
+                                                dense
+                                                outlined
+                                                color="blue"
+                                                v-model="authorizationCode"
+                                                type="text"
+                                                label="Authorization Code"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row q-py-sm">
+                                        <div class="col-12">
+                                            <q-input
+                                                dense
+                                                outlined
+                                                color="blue"
+                                                v-model="idToken"
+                                                type="text"
+                                                label="ID Token"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row q-py-sm">
+                                        <div class="col-12">
+                                            <q-input
+                                                dense
+                                                outlined
+                                                color="blue"
+                                                v-model="scope"
+                                                type="text"
+                                                label="Request scope"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row q-py-sm">
+                                        <div class="col-12">
+                                            <q-input
+                                                dense
+                                                outlined
+                                                color="blue"
+                                                v-model="requestToken"
+                                                type="text"
+                                                label="Request token"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row q-py-sm">
+                                        <div class="col-12">
+                                            <q-input
+                                                dense
+                                                outlined
+                                                color="blue"
+                                                v-model="client_assertion"
+                                                type="text"
+                                                label="Client Assertion"
+                                            />
+                                        </div>
+                                    </div>
+                                </q-card-section>
+                            </q-card>
+                            </q-expansion-item>
+                        </q-list>
+                    </div>
+                    </div>
+                </div>
+                    
+            
+        
         </div>
-    </div>
-        <div class="q-py-xl"></div>
+        <div class="website-body">
+        <div class="q-pt-xl">
+            <div class="row footer q-pt-md">
+                <div class="col-4">
+                    <ul>
+                        <li class="footer-heading">Institucional</li>
+                        <li><a>Confira Nossas Vagas</a></li>
+                        <li><a>Cotação do Dólar</a></li>
+                        <li><a></a></li>
+                        <li><a>Segurança</a></li>
+                        <li><a>Canal de denúncia</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <ul>
+                        <li class="footer-heading">Políticas</li>
+                        <li><a>Política de Segurança da Informação</a></li>
+                        <li><a>Políticas de Privacidade</a></li>
+                        <li><a>Tarifas</a></li>
+                    </ul>
+                </div>
+                <div class="col-4 q-pl-lg q-pt-lg">
+                    <q-btn @click="toggleRequestDetails" label="Mostrar detalhes da requisição" size="sm"></q-btn>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 q-pl-lg">
+                TPartyFinance S.A. - Borbocue Avenue, 1219 - Saint Agostine. ADD: 30190-924 - USA
+                FCN: 32.422.91268/32-01
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        </div>
     </div>
 
 
@@ -261,7 +329,15 @@
       el: '#q-app',
       data: function () {
         return {
-            leftDrawerOpen: true,
+            addBankOptions: [
+              "Wire Bank",
+              "Bank of Neutrons",
+              "Mars Bank",
+              "Best Bank Ever"
+            ],
+            selectedBank: "",
+            tab: '',
+            showRequestDetails: false,
             clientId: 'E7QDJ0EGjCEJGDdjXwgSRK1D48ca',
             grantType: 'authorization_code',
             clientAssertionType: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
@@ -276,6 +352,7 @@
             access_token: "",
             accounts: "",
             balance: "",
+            printedResponse: "",
             envVariables: {
                 AUDIENCE: "",
                 CLIENT_ID: "",
@@ -290,6 +367,10 @@
             window.location.href = `https://localhost:8243/authorize?prompt=login&state=state&response_type=code id_token&client_id=${this.clientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}&request=${this.requestToken}`
           },
 
+          toggleRequestDetails() {
+            this.showRequestDetails = this.showRequestDetails == true ? false : true
+          },
+
           
           getBalance() {
             const config = {
@@ -299,7 +380,7 @@
             }
 
             axios.get("http://localhost:8001/balance", config).then(response => {
-                this.balance = response.data
+                this.printedResponse = response.data
             })
           },
           
@@ -311,7 +392,7 @@
             }
 
             axios.get("http://localhost:8001/accounts", config).then(response => {
-                this.accounts = response.data
+                this.printedResponse = response.data
             })
           },
 
@@ -395,14 +476,49 @@
         width:  100vw;
     }
 
-    #website-body {
+    .website-body {
         width: 60%;
         margin: auto;
     }
 
     .toolbar-align-right {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+    }
+
+    .toolbar-orange {
+        justify-content: space-between;
+    }
+
+    .header-logo {
+        max-height: 50px;
+    }
+
+    .body-logo {
+        max-height: 150px;
+    }
+
+    ul {
+        list-style-type: none
+    }
+
+    .footer li a {
+        color:  #c27023;
+    }
+
+    h4 {
+        font-size: 25px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .footer {
+        border-top: 2px solid #d6d6d6;
+    }
+
+    .footer-heading {
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
     }
 
 
