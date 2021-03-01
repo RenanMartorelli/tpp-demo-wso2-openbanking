@@ -7,13 +7,16 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
-    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/quasar@1.15.0/dist/quasar.min.css" rel="stylesheet" type="text/css">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/quasar@1.15.0/dist/quasar.min.css" rel="stylesheet" type="text/css">
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-  <link rel="shortcut icon" href="favicon.png" type="image/png">  
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+ 
   <!-- Place favicon.ico in the root directory -->
   <meta name="theme-color" content="#fafafa">
 </head>
@@ -33,7 +36,7 @@
                 <q-tabs v-model="tab">
                     <q-tab name="Produtos Financeiros" label="Produtos Financeiros"></q-tab>
                     <q-tab name="Segurança" label="Segurança"></q-tab>
-                    <q-tab name="Contas" label="Contas"></q-tab>
+                    <q-tab name="Contas" @click="accountPage=false" label="Contas"></q-tab>
                   </q-tabs>
             </q-toolbar>
             <q-toolbar  class="toolbar-align-right col-4 bg-grey-3 text-grey-9 text-right">
@@ -62,19 +65,22 @@
                 </div>
             </q-toolbar> -->
         </div>
-        <div class="text-center q-mt-xl q-pa-xl">
-            <img class="body-logo" src="logo-fintech.png"/>
+        <div class="text-center q-pa-xl">
+            <img class="body-logo" src="logo-fintech.png" @click="fire()"/>
         </div>
         <div class="bg-grey-2 q-py-lg">
             <div class="website-body q-pb-xl">
                 
-            <div v-if="!loggedIn">
+            <div v-if="!accountPage">
                     <div class="row">
-                        <div class="col-5">
-                            <h4> Acessar contas</h4>
+                        <div class="col-7">
+                            <div class="q-mb-md">
+                                <h4 class="q-mb-none"> Acessar contas</h4>
+                                <span> Clique na conta desejada para ver mais detalhes</span>
+                            </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <q-btn label="" size="md" class="full-width" text-color="white" color="blue-6" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 70px;" src="logo-bank.png"/> </q-btn>
+                                    <!-- <q-btn label="" size="md" class="full-width" text-color="white" color="blue-6" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 70px;" src="logo-bank.png"/> </q-btn>
                                 </div>
                                 <div class="col-12 q-pt-md">
                                     <q-btn label="Hilts Bank" size="md" class="full-width" text-color="white" color="deep-purple-6">  </q-btn>
@@ -83,17 +89,87 @@
                                     <q-btn label="Bank of Plata" size="md" class="full-width" text-color="white" color="pink-6">  </q-btn>
                                 </div>
                                 <div class="col-12 q-pt-md">
-                                    <q-btn label="Either Bank" size="md" class="full-width" text-color="white" color="teal-6"> </q-btn>
+                                    <q-btn label="Either Bank" size="md" class="full-width" text-color="white" color="teal-6"> </q-btn> -->
+                                    <q-scroll-area style="height: 300px;" class="full-width">
+                                        <q-card flat bordered class="my-card">
+                                            <q-card-section v-if="loggedIn" @click="accountPage = true" horizontal class="bank-card">
+                                                <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
+                                                    <img src="logo-bank-color-icon.png" class="dot"/>
+                                                </q-card-section>
+                                                <q-card-section>
+                                                <div class="text-h6">Citizen Bank</div>
+                                                <div class="text-subtitle2">2312 9924 4417 7848 2842</div>
+                                                Conta Corrente: R$3066,09
+                                                </q-card-section>
+                                            </q-card-section>
+                                      
+                                            <q-separator v-if="loggedIn" inset></q-separator>
+
+                                            <q-card-section horizontal class="bank-card">
+                                                <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
+                                                    <span class="dot bg-red-13"></span>
+                                                </q-card-section>
+                                                <q-card-section>
+                                                <div class="text-h6">Plasma Bank</div>
+                                                <div class="text-subtitle2">3804 0074 0532 0130 0032</div>
+                                                Conta Corrente: R$2013,44
+                                                </q-card-section>
+                                            </q-card-section>
+                                      
+                                            <q-separator inset></q-separator>
+
+                                            <q-card-section horizontal class="bank-card">
+                                                <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
+                                                    <span class="dot bg-purple-8"></span>
+                                                </q-card-section>
+                                                <q-card-section>
+                                                <div class="text-h6">Either Bank</div>
+                                                <div class="text-subtitle2">1020 3345 9980 3432 9084</div>
+                                                Conta Poupança: R$1009,24
+                                                </q-card-section>
+                                            </q-card-section>
+                                      
+                                            <q-separator inset></q-separator>
+
+
+                                            <q-card-section horizontal class="bank-card">
+                                                <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
+                                                    <span class="dot bg-light-green-13"></span>
+                                                </q-card-section>
+                                                <q-card-section>
+                                                <div class="text-h6">Bank of Plata</div>
+                                                <div class="text-subtitle2">4245 5628 432 8965 2341</div>
+                                                Conta Corrente: R$514,84
+                                                </q-card-section>
+                                            </q-card-section>
+                                      
+                                            <q-separator inset></q-separator>
+
+
+                                            <q-card-section horizontal class="bank-card">
+                                                <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
+                                                    <span class="dot bg-orange"></span>
+                                                </q-card-section>
+                                                <q-card-section>
+                                                <div class="text-h6">Hilts Bank</div>
+                                                <div class="text-subtitle2">1020 3348 0922 5556 3211</div>
+                                                Conta Corrente: R$322,88
+                                                </q-card-section>
+                                            </q-card-section>
+                                          </q-card>
+                                      </q-scroll-area>
                                 </div>
+
+
                             </div>
                         </div>
-                        <div class="col-6 q-ml-xl q-pl-xl">
-                            <h4> Adicionar Nova Conta</h4>
+                        <div class="col-4 q-ml-xl">
+                            <h4> Adicionar Conta</h4>
                             <div class="row">
-                                <div class="col-2 q-pr-md">
+                                <div class="col-3 q-pr-md">
                                     <q-btn label="" class="full-width" icon="add" size="md" text-color="white" color="orange-6" @click="authenticateRedirect"></q-btn>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <q-select outlined v-model="selectedBank" dense color="orange" :options="addBankOptions" label="Selecionar Banco" />
                                 </div>
                             </div>
@@ -168,7 +244,7 @@
 
             
 
-            <div v-if="loggedIn">
+            <div v-if="accountPage">
                 <div class="row" >
                     <h4 class="q-my-none">Área do cliente</h4>
                 </div>
@@ -179,12 +255,13 @@
                             <q-card-section>
                               <div class="row items-center no-wrap">
                                 <div class="col">
-                                  <div class="text-h6">Banco CBank</div>
+                                  <div class="text-h6">Citizen Bank</div>
                                   <div class="text-subtitle2">João da Silva</div>
+                                  2312 9924 4417 7848 2842
                                 </div>
 
                       
-                                <img width="120px" src="logo-bank-black.png"/>
+                                <img width="220px" src="logo-bank-black.png"/>
                               </div>
                             </q-card-section>
                       
@@ -330,10 +407,10 @@
       data: function () {
         return {
             addBankOptions: [
-              "Wire Bank",
-              "Bank of Neutrons",
+              "Citizen Bank",
+              "International Bank",
               "Mars Bank",
-              "Best Bank Ever"
+              "Wire Bank"
             ],
             selectedBank: "",
             tab: '',
@@ -348,6 +425,7 @@
             authorizationCode: '',
             idToken: '',
             loggedIn: false,
+            accountPage: false,
             client_assertion: "",
             access_token: "",
             accounts: "",
@@ -359,7 +437,14 @@
                 REDIRECT_URL: "",
                 REQUEST_AUTH_TOKEN: "",
                 WSO2_PORTAL_BASE_URL: ""
-            }
+            },
+            thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#027be3',
+                width: '5px',
+                opacity: 0.75
+            },
         }
       },
       methods: {
@@ -381,6 +466,8 @@
 
             axios.get("http://localhost:8001/balance", config).then(response => {
                 this.printedResponse = response.data
+            }).catch( error => {
+                this.errorPopup("O consentimento para acessar esse banco foi revogado")
             })
           },
           
@@ -393,6 +480,8 @@
 
             axios.get("http://localhost:8001/accounts", config).then(response => {
                 this.printedResponse = response.data
+            }).catch( error => {
+                this.errorPopup("O consentimento para acessar esse banco foi revogado")
             })
           },
 
@@ -445,8 +534,17 @@
             })
           },
 
+          errorPopup(message) {
+            Swal.fire({
+                title: message,
+                icon: 'warning',
+            })
+          },
+
+
           loggedPage() {
             this.loggedIn = true
+            this.addBankOptions.shift()
             this.getToken();
           }
       },
@@ -521,6 +619,22 @@
         letter-spacing: 1.5px;
     }
 
+    .dot {
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .bank-card {
+        transition: 0.2s;
+    }
+
+    .bank-card:hover {
+        cursor: pointer;
+        background-color: #dbdbdb;
+    }
+
 
 </style>
 
@@ -528,3 +642,4 @@
 
 
 <!-- IAT hora de agora, Expiration: umas horas pra frente, JTI pode ser o timestamp-->
+

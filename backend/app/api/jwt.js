@@ -92,6 +92,8 @@ module.exports = (app) => {
 
                   console.log(error)
                   res.status(400)
+                  res.json({"error": true})
+
                 })   
               }, function(error) {
                   console.log(error);
@@ -114,6 +116,8 @@ module.exports = (app) => {
       }).catch(error => {
         console.log(error)
         res.status(400)
+        res.json({"error": true})
+
       })
     })
   
@@ -137,6 +141,8 @@ module.exports = (app) => {
       }).catch(error => {
         console.log(error)
         res.status(400)
+        res.json({"error": true})
+        
       })
     })
 
