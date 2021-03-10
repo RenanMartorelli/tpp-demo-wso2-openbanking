@@ -13,7 +13,8 @@
   <meta property="og:type" content="">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
   <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
  
@@ -32,41 +33,22 @@
         <div>
             <div class="row no-wrap">
             <q-toolbar class="col-8 toolbar-orange bg-orange q-pa-xs text-white">
-                <img class="header-logo" src="logo-fintech-white.png"></img>
+                <img class="header-logo" src="images/logo-fintech-white.png"></img>
                 <q-tabs v-model="tab">
-                    <q-tab name="Produtos Financeiros" label="Produtos Financeiros"></q-tab>
-                    <q-tab name="Segurança" label="Segurança"></q-tab>
-                    <q-tab name="Contas" @click="accountPage=false" label="Contas"></q-tab>
+                    <q-tab name="Produtos Financeiros" :label="text.header.financial_products"></q-tab>
+                    <q-tab name="Segurança" :label="text.header.security"></q-tab>
+                    <q-tab name="Contas" @click="accountPage=false" :label="text.header.accounts"></q-tab>
                   </q-tabs>
             </q-toolbar>
             <q-toolbar  class="toolbar-align-right col-4 bg-grey-3 text-grey-9 text-right">
-                <span class="q-pr-md">Bem-vindo(a) João da Silva</span>
+                <span class="q-pr-md">{{ text.header.welcome }} {{ text.general.user_full_name }}</span>
                 <q-btn flat round dense icon="apps" class="q-mr-xs" />
                 <q-btn flat round dense icon="more_vert" />
             </q-toolbar>
             </div>
-            <!-- <q-toolbar class="text-primary">
-                <q-btn flat round dense icon="menu" />
-                <q-toolbar-title>
-                  Toolbar
-                </q-toolbar-title>
-                <q-btn flat round dense icon="more_vert" />
-              </q-toolbar> -->
-            <!-- <q-toolbar class="bg-orange text-white shadow-2">
-              <q-btn flat round dense icon="menu" class="q-mr-sm" />
-        
-              <div class="q-pl-md q-gutter-sm row no-wrap items-center">
-              <q-btn round flat>
-                    <q-avatar size="26px">
-                    <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-                    </q-avatar>
-                    <q-tooltip>Account</q-tooltip>
-                </q-btn>
-                </div>
-            </q-toolbar> -->
         </div>
         <div class="text-center q-pa-xl">
-            <img class="body-logo" src="logo-fintech.png" @click="fire()"/>
+            <img class="body-logo" src="images/logo-fintech.png" @click="fire()"/>
         </div>
         <div class="bg-grey-2 q-py-lg">
             <div class="website-body q-pb-xl">
@@ -75,31 +57,21 @@
                     <div class="row">
                         <div class="col-7">
                             <div class="q-mb-md">
-                                <h4 class="q-mb-none"> Acessar contas</h4>
-                                <span> Clique na conta desejada para ver mais detalhes</span>
+                                <h4 class="q-mb-none"> {{ text.accounts_screen.access_accounts }}</h4>
+                                <span> {{ text.accounts_screen.click_on_the_account }}</span>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <!-- <q-btn label="" size="md" class="full-width" text-color="white" color="blue-6" @click="authenticateRedirect"> <img class="q-ml-sm" style="width: 70px;" src="logo-bank.png"/> </q-btn>
-                                </div>
-                                <div class="col-12 q-pt-md">
-                                    <q-btn label="Hilts Bank" size="md" class="full-width" text-color="white" color="deep-purple-6">  </q-btn>
-                                </div>
-                                <div class="col-12 q-pt-md">
-                                    <q-btn label="Bank of Plata" size="md" class="full-width" text-color="white" color="pink-6">  </q-btn>
-                                </div>
-                                <div class="col-12 q-pt-md">
-                                    <q-btn label="Either Bank" size="md" class="full-width" text-color="white" color="teal-6"> </q-btn> -->
                                     <q-scroll-area style="height: 300px;" class="full-width">
                                         <q-card flat bordered class="my-card">
                                             <q-card-section v-if="loggedIn" @click="accountPage = true" horizontal class="bank-card">
                                                 <q-card-section class="col-3 q-pr-none flex flex-center rounded-borders">
-                                                    <img src="logo-bank-color-icon.png" class="dot"/>
+                                                    <img src="images/logo-bank-icon.png" class="dot"/>
                                                 </q-card-section>
                                                 <q-card-section>
-                                                <div class="text-h6">Citizen Bank</div>
+                                                <div class="text-h6">{{ text.general.bank_name }}</div>
                                                 <div class="text-subtitle2">2312 9924 4417 7848 2842</div>
-                                                Conta Corrente: R$3066,09
+                                                {{ text.accounts_screen.current_account }}: R$3066,09
                                                 </q-card-section>
                                             </q-card-section>
                                       
@@ -112,7 +84,7 @@
                                                 <q-card-section>
                                                 <div class="text-h6">Plasma Bank</div>
                                                 <div class="text-subtitle2">3804 0074 0532 0130 0032</div>
-                                                Conta Corrente: R$2013,44
+                                                {{ text.accounts_screen.current_account }}: R$2013,44
                                                 </q-card-section>
                                             </q-card-section>
                                       
@@ -125,7 +97,7 @@
                                                 <q-card-section>
                                                 <div class="text-h6">Either Bank</div>
                                                 <div class="text-subtitle2">1020 3345 9980 3432 9084</div>
-                                                Conta Poupança: R$1009,24
+                                                {{ text.accounts_screen.savings_account }}: R$1009,24
                                                 </q-card-section>
                                             </q-card-section>
                                       
@@ -139,7 +111,7 @@
                                                 <q-card-section>
                                                 <div class="text-h6">Bank of Plata</div>
                                                 <div class="text-subtitle2">4245 5628 432 8965 2341</div>
-                                                Conta Corrente: R$514,84
+                                                {{ text.accounts_screen.current_account }}: R$514,84
                                                 </q-card-section>
                                             </q-card-section>
                                       
@@ -153,7 +125,7 @@
                                                 <q-card-section>
                                                 <div class="text-h6">Hilts Bank</div>
                                                 <div class="text-subtitle2">1020 3348 0922 5556 3211</div>
-                                                Conta Corrente: R$322,88
+                                                {{ text.accounts_screen.current_account }}: R$322,88
                                                 </q-card-section>
                                             </q-card-section>
                                           </q-card>
@@ -164,13 +136,13 @@
                             </div>
                         </div>
                         <div class="col-4 q-ml-xl">
-                            <h4> Adicionar Conta</h4>
+                            <h4> {{ text.accounts_screen.add_account }}</h4>
                             <div class="row">
                                 <div class="col-3 q-pr-md">
                                     <q-btn label="" class="full-width" icon="add" size="md" text-color="white" color="orange-6" @click="authenticateRedirect"></q-btn>
                                 </div>
                                 <div class="col-8">
-                                    <q-select outlined v-model="selectedBank" dense color="orange" :options="addBankOptions" label="Selecionar Banco" />
+                                    <q-select outlined v-model="selectedBank" dense color="orange" :options="addBankOptions" :label="text.accounts_screen.select_bank" />
                                 </div>
                             </div>
                         </div>
@@ -180,7 +152,7 @@
                             <q-list bordered class="rounded-borders">
                                 <q-expansion-item
                                 expand-separator
-                                label="Detalhes da requisição"
+                                :label="text.general.request_details"
                                 class="bg-grey-1"
                                 >
                                 <q-card class="bg-grey-1">
@@ -221,18 +193,6 @@
                                                 />
                                             </div>
                                         </div>
-                                        <div class="row q-py-sm">
-                                            <div class="col-12">
-                                                <q-input
-                                                    dense
-                                                    outlined
-                                                    color="blue"
-                                                    v-model="requestToken"
-                                                    type="text"
-                                                    label="Request token"
-                                                />
-                                            </div>
-                                        </div>
                                     </q-card-section>
                                 </q-card>
                                 </q-expansion-item>
@@ -246,7 +206,7 @@
 
             <div v-if="accountPage">
                 <div class="row" >
-                    <h4 class="q-my-none">Área do cliente</h4>
+                    <h4 class="q-my-none">{{ text.account_detail_screen.customer_area }}</h4>
                 </div>
 
                 <div class="row">
@@ -255,19 +215,18 @@
                             <q-card-section>
                               <div class="row items-center no-wrap">
                                 <div class="col">
-                                  <div class="text-h6">Citizen Bank</div>
-                                  <div class="text-subtitle2">João da Silva</div>
+                                  <div class="text-h6">{{ text.general.bank_name }}</div>
+                                  <div class="text-subtitle2">{{ text.general.user_full_name }}</div>
                                   2312 9924 4417 7848 2842
                                 </div>
-
                       
-                                <img width="220px" src="logo-bank-black.png"/>
+                                <img width="220px" src="images/logo-bank.png"/>
                               </div>
                             </q-card-section>
                       
                             <q-card-section class="q-pt-none">
-                              <q-btn label="Obter contas" size="md" outline text-color="grey-10"  class="q-mt-md" color="grey-2" @click="getAccounts"></q-btn>
-                              <q-btn label="Obter Saldo" size="md"  outline text-color="grey-10"  class="q-mt-md q-ml-md" color="grey-2" @click="getBalance"></q-btn>
+                              <q-btn :label="text.account_detail_screen.get_accounts" size="md" outline text-color="grey-10"  class="q-mt-md" color="grey-2" @click="getAccounts"></q-btn>
+                              <q-btn :label="text.account_detail_screen.get_currency" size="md"  outline text-color="grey-10"  class="q-mt-md q-ml-md" color="grey-2" @click="getBalance"></q-btn>
                             </q-card-section>
                       
                             <q-separator></q-separator>
@@ -285,7 +244,7 @@
                         <q-list bordered class="rounded-borders">
                             <q-expansion-item
                             expand-separator
-                            label="Detalhes da requisição"
+                            :label="text.general.request_datails"
                             class="bg-grey-1"
                             >
                             <q-card class="bg-grey-1">
@@ -332,18 +291,6 @@
                                                 dense
                                                 outlined
                                                 color="blue"
-                                                v-model="requestToken"
-                                                type="text"
-                                                label="Request token"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row q-py-sm">
-                                        <div class="col-12">
-                                            <q-input
-                                                dense
-                                                outlined
-                                                color="blue"
                                                 v-model="client_assertion"
                                                 type="text"
                                                 label="Client Assertion"
@@ -366,29 +313,28 @@
             <div class="row footer q-pt-md">
                 <div class="col-4">
                     <ul>
-                        <li class="footer-heading">Institucional</li>
-                        <li><a>Confira Nossas Vagas</a></li>
-                        <li><a>Cotação do Dólar</a></li>
-                        <li><a></a></li>
-                        <li><a>Segurança</a></li>
-                        <li><a>Canal de denúncia</a></li>
+                        <li class="footer-heading">{{ text.footer.institutional }}</li>
+                        <li><a>{{ text.footer.jobs }}</a></li>
+                        <li><a>{{ text.footer.quotation }}</a></li>
+                        <li><a>{{ text.footer.security }}</a></li>
+                        <li><a>{{ text.footer.complaint_channel }}</a></li>
                     </ul>
                 </div>
                 <div class="col-4">
                     <ul>
-                        <li class="footer-heading">Políticas</li>
-                        <li><a>Política de Segurança da Informação</a></li>
-                        <li><a>Políticas de Privacidade</a></li>
-                        <li><a>Tarifas</a></li>
+                        <li class="footer-heading">{{ text.footer.policies }}</li>
+                        <li><a>{{ text.footer.security_policy }}</a></li>
+                        <li><a>{{ text.footer.privacy_policy }}</a></li>
+                        <li><a>{{ text.footer.taxes }}</a></li>
                     </ul>
                 </div>
                 <div class="col-4 q-pl-lg q-pt-lg">
-                    <q-btn @click="toggleRequestDetails" label="Mostrar detalhes da requisição" size="sm"></q-btn>
+                    <q-btn @click="toggleRequestDetails" :label="text.footer.show_request_details" size="sm"></q-btn>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 q-pl-lg">
-                TPartyFinance S.A. - Borbocue Avenue, 1219 - Saint Agostine. ADD: 30190-924 - USA
+                TPartyFinance S.A. - Atlantic Avenue, 1219 - Agostine Hill. ADD: 30190-924 - USA
                 FCN: 32.422.91268/32-01
                 </div>
             </div>
@@ -401,25 +347,33 @@
 
 
   <script>
-
     new Vue({
       el: '#q-app',
       data: function () {
         return {
+            // This is the Only Parameter that has to be configured on the frontend
+            // All other parameters will be configured on .env file on the backend. Follow README.md file for the instructions.
+            apiBaseUrl: "http://localhost:8001",
+
             addBankOptions: [
               "Citizen Bank",
               "International Bank",
               "Mars Bank",
               "Wire Bank"
             ],
+            text: {
+                "header": {},
+                "general": {},
+                "footer": {},
+                "accounts_screen": {},
+                "account_detail_screen": {},
+                "alerts": {}
+            },
             selectedBank: "",
             tab: '',
             showRequestDetails: false,
-            clientId: 'E7QDJ0EGjCEJGDdjXwgSRK1D48ca',
             grantType: 'authorization_code',
             clientAssertionType: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-            redirectUri: 'http://localhost:8081',
-            requestToken: 'eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkR3TUtkV01tajdQV2ludm9xZlF5WFZ6eVo2UWMifQ.eyJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo4MjQzL3Rva2VuIiwicmVzcG9uc2VfdHlwZSI6ImNvZGUgaWRfdG9rZW4iLCJjbGllbnRfaWQiOiJFN1FESjBFR2pDRUpHRGRqWHdnU1JLMUQ0OGNhIiwicmVkaXJlY3RfdXJpIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwic3RhdGUiOiJhZjBpZmpzbGRraiIsIm5vbmNlIjoibi0wUzZfV3pBMk1qIiwiY2xhaW1zIjp7InNoYXJpbmdfZHVyYXRpb24iOiI3MjAwIiwiaWRfdG9rZW4iOnsiYWNyIjp7ImVzc2VudGlhbCI6dHJ1ZSwidmFsdWVzIjpbInVybjpjZHMuYXU6Y2RyOjMiXX19LCJ1c2VyaW5mbyI6eyJnaXZlbl9uYW1lIjpudWxsLCJmYW1pbHlfbmFtZSI6bnVsbH19fQ.JKhZazDngh5z6BNN1p8SrONS3By7SFabnEsXHZ7VVdPcjRIWX15Lf7SZ1XYsXgE39eX_Ot8p67rRq9h88u3lD8Sfp2v8VUU3dUmXwNPUttWYuVrNlxCvGaza8CLOJ0UhfzZkN4EVc39us6_g3fo1AooOPx5aAohwAUT7iycVYtHJnZrofeTgyQ_IJXMJUpr7olUXcGsk_g9oVpgCPCfPxaAd9HX9EHJVR-Bx-YOfDwtQC_msizhKxmqmlbIeOZYPPI7EF8RgeUhGDIrkfCrZcjurU4-4Rzge6xGqoLa9ncLKJBGFfGKfYL64X032YIjcwwiDxFZLC7RRAy2IrDS5lg',
             scope: 'openid bank:accounts.basic:read bank:accounts.detail:read bank:transactions:read',
             privateKey: '',
             authorizationCode: '',
@@ -428,28 +382,19 @@
             accountPage: false,
             client_assertion: "",
             access_token: "",
-            accounts: "",
-            balance: "",
             printedResponse: "",
             envVariables: {
-                AUDIENCE: "",
                 CLIENT_ID: "",
                 REDIRECT_URL: "",
                 REQUEST_AUTH_TOKEN: "",
-                WSO2_PORTAL_BASE_URL: ""
-            },
-            thumbStyle: {
-                right: '4px',
-                borderRadius: '5px',
-                backgroundColor: '#027be3',
-                width: '5px',
-                opacity: 0.75
-            },
+                WSO2_PORTAL_BASE_URL: "",
+                TRANSLATIONS_FILE: ""
+            }
         }
       },
       methods: {
           authenticateRedirect() {
-            window.location.href = `https://localhost:8243/authorize?prompt=login&state=state&response_type=code id_token&client_id=${this.clientId}&redirect_uri=${this.redirectUri}&scope=${this.scope}&request=${this.requestToken}`
+            window.location.href = `${this.envVariables.WSO2_PORTAL_BASE_URL}/authorize?prompt=login&state=state&response_type=code id_token&client_id=${this.envVariables.CLIENT_ID}&redirect_uri=${this.envVariables.REDIRECT_URL}&scope=${this.scope}&request=${this.envVariables.REQUEST_AUTH_TOKEN}`
           },
 
           toggleRequestDetails() {
@@ -464,7 +409,7 @@
                 }
             }
 
-            axios.get("http://localhost:8001/balance", config).then(response => {
+            axios.get(`${this.apiBaseUrl}/balance`, config).then(response => {
                 this.printedResponse = response.data
             }).catch( error => {
                 this.errorPopup("O consentimento para acessar esse banco foi revogado")
@@ -478,7 +423,7 @@
                 }
             }
 
-            axios.get("http://localhost:8001/accounts", config).then(response => {
+            axios.get(`${this.apiBaseUrl}/accounts`, config).then(response => {
                 this.printedResponse = response.data
             }).catch( error => {
                 this.errorPopup("O consentimento para acessar esse banco foi revogado")
@@ -488,16 +433,11 @@
           getToken() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            var code = urlParams.get("code");
+            const code = urlParams.get("code");
             this.authorizationCode = code;
 
-            var idToken = urlParams.get("id_token");
+            const idToken = urlParams.get("id_token");
             this.idToken = idToken;
-
-            console.log(code)
-            console.log("--------------- \n")
-            console.log(idToken)
-            // const axios = require('axios');
 
             data = {
                 "authorizationCode": code
@@ -509,9 +449,8 @@
                 }
             }
 
-            axios.post('http://localhost:8001/sign-token', data, config)
+            axios.post(`${this.apiBaseUrl}/token`, data, config)
             .then((response) => {
-                console.log(response.data)
                 this.access_token = response.data.access_token
                 this.client_assertion = response.data.client_assertion
             })
@@ -520,18 +459,16 @@
             })
           },
 
-          getEnvVariables(){
-            axios.get("http://localhost:8001/environment-variables").then(response => {
-                console.log(response.data)
+          async getEnvVariables(){
+             response = await axios.get(`${this.apiBaseUrl}/environment-variables`)
                 const respEnv = response.data
                 this.envVariables = {
-                    AUDIENCE: respEnv.AUDIENCE,
                     CLIENT_ID: respEnv.CLIENT_ID,
                     REDIRECT_URL: respEnv.REDIRECT_URL,
                     REQUEST_AUTH_TOKEN: respEnv.REQUEST_AUTH_TOKEN,
-                    WSO2_PORTAL_BASE_URL: respEnv.WSO2_PORTAL_BASE_URL
+                    WSO2_PORTAL_BASE_URL: respEnv.WSO2_PORTAL_BASE_URL,
+                    TRANSLATIONS_FILE: respEnv.TRANSLATIONS_FILE
                 }
-            })
           },
 
           errorPopup(message) {
@@ -541,7 +478,6 @@
             })
           },
 
-
           loggedPage() {
             this.loggedIn = true
             this.addBankOptions.shift()
@@ -549,19 +485,23 @@
           }
       },
       async mounted () {
-        this.getEnvVariables();
+        const vue = this
 
+        await this.getEnvVariables();
         var currentUrl = window.location.href;
-          if(currentUrl.includes('#')){
+        if(currentUrl.includes('#')){
             var newUrl = currentUrl.replace("#","?")
             window.location.href = newUrl
-          }
+        }
 
         if(window.location.search != '') {
             this.loggedPage()
             // this.generateClientAssetionToken();
         }
-
+        
+        fetch("translation/" + this.envVariables.TRANSLATIONS_FILE)
+            .then(response => response.json())
+            .then(json => vue.text = json);
       }
       // ...etc
     })
@@ -570,71 +510,7 @@
 
 </body>
 <style>
-    #q-app {
-        width:  100vw;
-    }
-
-    .website-body {
-        width: 60%;
-        margin: auto;
-    }
-
-    .toolbar-align-right {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .toolbar-orange {
-        justify-content: space-between;
-    }
-
-    .header-logo {
-        max-height: 50px;
-    }
-
-    .body-logo {
-        max-height: 150px;
-    }
-
-    ul {
-        list-style-type: none
-    }
-
-    .footer li a {
-        color:  #c27023;
-    }
-
-    h4 {
-        font-size: 25px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .footer {
-        border-top: 2px solid #d6d6d6;
-    }
-
-    .footer-heading {
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
-
-    .dot {
-        height: 60px;
-        width: 60px;
-        border-radius: 50%;
-        display: inline-block;
-    }
-
-    .bank-card {
-        transition: 0.2s;
-    }
-
-    .bank-card:hover {
-        cursor: pointer;
-        background-color: #dbdbdb;
-    }
-
+   
 
 </style>
 

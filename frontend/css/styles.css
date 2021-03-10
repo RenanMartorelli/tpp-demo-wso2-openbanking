@@ -1,0 +1,64 @@
+#q-app {
+    width:  100vw;
+}
+
+.website-body {
+    width: 60%;
+    margin: auto;
+}
+
+.toolbar-align-right {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toolbar-orange {
+    justify-content: space-between;
+}
+
+.header-logo {
+    max-height: 50px;
+}
+
+.body-logo {
+    max-height: 150px;
+}
+
+ul {
+    list-style-type: none
+}
+
+.footer li a {
+    color:  #c27023;
+}
+
+h4 {
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.footer {
+    border-top: 2px solid #d6d6d6;
+}
+
+.footer-heading {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.dot {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.bank-card {
+    transition: 0.2s;
+}
+
+.bank-card:hover {
+    cursor: pointer;
+    background-color: #dbdbdb;
+}

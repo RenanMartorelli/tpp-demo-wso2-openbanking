@@ -1,0 +1,42 @@
+{
+    "header": {
+        "financial_products" : "Financial Products",
+        "security" : "Security",
+        "accounts": "Accounts",
+        "welcome" : "Welcome,"
+    },
+    "general": {
+        "bank_name": "Citzen Bank",
+        "user_full_name" : "John Mills",
+        "monetary_symbol": "$",
+        "request_details": "Request Details"
+    },
+    "accounts_screen": {
+        "access_accounts": "ACCESS ACCOUNTS",
+        "click_on_the_account": "Click on the account to see more details",
+        "add_account": "Add Account",
+        "select_bank": "Select Bank",
+        "current_account": "Current Account",
+        "savings_account": "Savings Account"
+    },
+    "account_detail_screen": {
+        "customer_area": "Customer Area",
+        "get_accounts": "Get Accounts",
+        "get_currency": "Get Currency"
+    },
+    "footer": {
+        "show_request_details": "Show Request Details",
+        "institutional": "Institutional",
+        "jobs": "Jobs",
+        "quotation": "Quotations",
+        "security": "Security",
+        "complaint_channel": "Complaints Channel",
+        "policies": "Policies",
+        "security_policy": "Security Policy",
+        "privacy_policy": "Privacy Policy",
+        "taxes": "Taxes"
+    },
+    "alets": {
+        "revoked_consent": "The access consent for this bank was revoked"
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "header": {
+        "financial_products" : "Produtos Financeiros",
+        "security" : "Segurança",
+        "accounts": "Contas",
+        "welcome" : "Bem-vindo(a)"
+    },
+    "general": {
+        "bank_name": "Citzen Bank",
+        "user_full_name" : "João da Silva",
+        "monetary_symbol": "R$",
+        "request_datails": "Detalhes da requisição"
+    },
+    "accounts_screen": {
+        "access_accounts": "ACESSAR CONTAS",
+        "click_on_the_account": "Clique na conta desejada para ver mais detalhes",
+        "add_account": "ADICIONAR CONTA",
+        "select_bank": "Selecionar Banco",
+        "current_account": "Conta Corrente",
+        "savings_account": "Conta Poupança"
+    },
+    "account_detail_screen": {
+        "customer_area": "Área do Cliente",
+        "get_accounts": "Obter Contas",
+        "get_currency": "Obter Saldo"
+    },
+    "footer": {
+        "show_request_details": "Mostrar detalhes da requisição",
+        "institutional": "Institucional",
+        "jobs": "Nossas Vagas",
+        "quotation": "Cotação do Dólar",
+        "security": "Segurança",
+        "complaint_channel": "Canal de Denúncias",
+        "policies": "Políticas",
+        "security_policy": "Política de Segurança",
+        "privacy_policy": "Política de Privacidade",
+        "taxes": "Tarifas"
+    },
+    "alets": {
+        "revoked_consent": "O consentimento para acessar esse banco foi revogado"
+    }
+}
