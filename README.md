@@ -1,6 +1,8 @@
 
 # TPP Open Banking - WSO2 Demo
 
+![Screenshot of the demo's first screen](https://raw.githubusercontent.com/RenanMartorelli/tpp-demo-wso2-openbanking/master/demo-images/first_screen.png)
+
 This demo consists of a CDN Vue.js webapp and a Node.js Backend acting as a sample  third party provider to demonstrate some of the WSO2 Open Banking functionalities.
 
 ## Prerequisites
