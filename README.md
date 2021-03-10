@@ -14,29 +14,30 @@ The environment parameters are all set in a `.env`  file on `backend` folder. Af
 Proceed with the configuration of the parameters:
 
 ```php
-	# Parameters that don't need to be changed by default
-    CORS_ALLOW_ORIGINS=*
-	REDIRECT_URL=http://localhost:8081
-    
-    ### Parameters that need to be configured
-    # from the application created on WSO2 OB APIM
-    CLIENT_ID=              
-                   
-    # WSO2 OB APIM Token url
-    AUDIENCE=https://localhost:8243/token  
+### Parameters that don't need to be changed by default
+CORS_ALLOW_ORIGINS=*
+REDIRECT_URL=http://localhost:8081
 
-	# WSO2 OB APIM url, accessible from the node.js server
-    WSO2_API_BASE_URL=https://host.docker.internal:8243
-    
-	# WSO2 OB APIM url, accessible from the web browser
-    WSO2_PORTAL_BASE_URL=https://localhost:8243
-    
-    # translation file to be used on the frontend. Check `translations` folder for options
-    TRANSLATIONS_FILE=en.json
-	
-	# this is a static JWT token that has to be generated for use in the authentication flow,
-	# check session below to generate it.
-	REQUEST_AUTH_TOKEN=
+### Parameters that need to be configured
+# from the application created on WSO2 OB APIM
+CLIENT_ID=              
+                
+# WSO2 OB APIM Token url
+AUDIENCE=https://localhost:8243/token  
+
+# WSO2 OB APIM url, accessible from the node.js server
+WSO2_API_BASE_URL=https://host.docker.internal:8243
+
+# WSO2 OB APIM url, accessible from the web browser
+WSO2_PORTAL_BASE_URL=https://localhost:8243
+
+# translation file to be used on the frontend. 
+#Check `translations` folder for options
+TRANSLATIONS_FILE=en.json
+
+# this is a static JWT token that has to be generated 
+#for use in the authentication flow,check session below to generate it.
+REQUEST_AUTH_TOKEN=
 ````
 
 ### Obtaining REQUEST_AUTH_TOKEN
