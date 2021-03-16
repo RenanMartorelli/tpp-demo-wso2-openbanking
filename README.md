@@ -5,6 +5,12 @@
 
 This demo consists of a CDN Vue.js webapp and a Node.js Backend acting as a sample  third party provider to demonstrate some of the WSO2 Open Banking functionalities.
 
+## Demo scope
+
+This demo can be used to test/demonstrate capabilities of WSO2 Open Banking such
+- OAuth/OIDC Hybrid flow and API Security compliant with CIBA and FAPI specifications of the Australian Consumer Data Standards.
+- Third Party Provider access grant and revokation for user accounts.
+
 ## Prerequisites
 * Docker & Docker-compose (both  frontend and backend applications are set to be run in docker)
 * A Working WSO2 Open Banking 2.0 environment with configurations following "OB Configs Session" on this readme.
@@ -69,6 +75,19 @@ Finally, access application on default port: http://localhost:8081
 
 > Note: frontend code modifications will take effect immediately, but node.js backend modifications will require rebuilding the containers.
 ## OB Configs Session
+This session describes the configs that have to be done on the WSO2 OB Servers in order to run the demo with all its features.
+This Demo was prepared with WSO2 OB 2.0, using the Australian CDA Model
+
+Go through this step-by-step guide to configure the OB Servers with de Au Model.
+
+(https://docs.wso2.com/display/OB200/Try+Local+Setup#1f05ff99aaaa46f1b153a62484e4e8b5)
+
+Make sure you create a sample "Consumer Data Standards API v1.3" using the artifacts referenced in the documentation.
+
+After publishing the API, create a sample application to subscribe to this API and add the public PEM certificate* created for this demo at `backend/tpp-cert.pem`.
+
+> * The keys contained in this repository are self-signed and should be used solely for trying out this demonstration.
+
 
 ## Changing Images/CSS
 CSS customizations can be directly done on `css/styles.css` file.

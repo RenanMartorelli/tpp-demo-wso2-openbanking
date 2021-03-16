@@ -412,7 +412,7 @@
             axios.get(`${this.apiBaseUrl}/balance`, config).then(response => {
                 this.printedResponse = response.data
             }).catch( error => {
-                this.errorPopup("O consentimento para acessar esse banco foi revogado")
+                this.errorPopup(this.text.alerts.revoked_consent)
             })
           },
           
@@ -426,7 +426,7 @@
             axios.get(`${this.apiBaseUrl}/accounts`, config).then(response => {
                 this.printedResponse = response.data
             }).catch( error => {
-                this.errorPopup("O consentimento para acessar esse banco foi revogado")
+                this.errorPopup(this.text.alerts.revoked_consent)
             })
           },
 
