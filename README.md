@@ -3,13 +3,11 @@
 
 ![Screenshot of the demo's first screen](https://raw.githubusercontent.com/RenanMartorelli/tpp-demo-wso2-openbanking/master/demo-images/first_screen.png)
 
-This demo consists of a CDN Vue.js webapp and a Node.js Backend acting as a sample  third party provider to demonstrate some of the WSO2 Open Banking functionalities.
-
-## Demo scope
-
-This demo can be used to test/demonstrate capabilities of WSO2 Open Banking such
+This demo can be used to test/demonstrate capabilities of WSO2 Open Banking such as:
 - OAuth/OIDC Hybrid flow and API Security compliant with CIBA and FAPI specifications of the Australian Consumer Data Standards.
 - Third Party Provider access grant and revokation for user accounts.
+
+This demo consists of a CDN Vue.js webapp and a Node.js Backend acting as a sample third party provider application.
 
 ## Prerequisites
 * Docker & Docker-compose (both  frontend and backend applications are set to be run in docker)
