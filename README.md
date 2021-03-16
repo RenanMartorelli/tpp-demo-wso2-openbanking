@@ -93,7 +93,7 @@ After publishing the API, create a sample application to subscribe to this API a
 
 > The keys contained in this repository are self-signed and should be used solely for trying out this demonstration.
 
-For any debugging purposes, all Authentication Flows and API requests for this demo were built following the specification descripted in:
+For any debugging purposes, all authentication flows and API requests for this demo were built following the specification descripted in:
 https://docs.wso2.com/display/OB200/Consumer+Data+Standards+API+v1.3.0
 
 ## Changing Images/CSS
