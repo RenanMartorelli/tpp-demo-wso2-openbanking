@@ -4,10 +4,10 @@
 ![Screenshot of the demo's first screen](https://raw.githubusercontent.com/RenanMartorelli/tpp-demo-wso2-openbanking/master/demo-images/first_screen.png)
 
 This demo can be used to test/demonstrate capabilities of WSO2 Open Banking such as:
-- OAuth/OIDC Hybrid flow and API Security compliant with CIBA and FAPI specifications of the Australian Consumer Data Standards.
-- Third Party Provider access grant and revokation for user accounts.
+- OAuth/OIDC Hybrid flow and API security compliant FAPI specifications of the australian Consumer Data Standards.
+- Third party provider access grant and revokation for user accounts.
 
-This demo consists of a CDN Vue.js webapp and a Node.js Backend acting as a sample third party provider application.
+This demo consists of a CDN Vue.js webapp and a Node.js backend acting as a sample third party provider application.
 
 
 ## Prerequisites
@@ -22,13 +22,15 @@ The environment parameters are all set in a `.env`  file on `backend` folder. Af
 Proceed with the configuration of the parameters:
 
 ```php
-### Parameters that don't need to be changed by default
+### Parameters that DO NOT need to be changed by default ###
+
 CORS_ALLOW_ORIGINS=*
 REDIRECT_URL=http://localhost:8081
 
-### Parameters that need to be configured
-# from the application created on WSO2 OB APIM
-CLIENT_ID=              
+
+### Parameters that DO need to be configured ###
+
+CLIENT_ID=       # From the application created on WSO2 OB APIM       
                 
 # WSO2 OB APIM Token url
 AUDIENCE=https://localhost:8243/token  
@@ -39,12 +41,12 @@ WSO2_API_BASE_URL=https://host.docker.internal:8243
 # WSO2 OB APIM url, accessible from the web browser
 WSO2_PORTAL_BASE_URL=https://localhost:8243
 
-# translation file to be used on the frontend. 
-#Check `translations` folder for options
+# Translation file to be used on the frontend. 
+# Check `translations` folder for options
 TRANSLATIONS_FILE=en.json
 
-# this is a static JWT token that has to be generated 
-#for use in the authentication flow,check session below to generate it.
+# This is a static JWT token that has to be generated 
+# for use in the authentication flow,check session below to generate it.
 REQUEST_AUTH_TOKEN=
 ````
 
@@ -54,7 +56,7 @@ After configuring all other parameters besides `REQUEST_AUTH_TOKEN`, run the ser
 ```bash
 $ docker-compose --build && docker-compose up -d
 ```
-Now run the following curl command to generate the token.
+Run the following curl command to generate the token.
 ```bash
 $ curl --location --request GET 'http://localhost:8001/sign-token'
 ```
