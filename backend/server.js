@@ -24,5 +24,5 @@ app.use(cors(corsOptions))
 
 apiJWT(app);
 
-app.listen(8000, () => console.log("App listening on port " + process.env.PORT));
+app.listen(8000, () => console.log("App listening on port 8000"));
 process.on('SIGINT', () => { console.log("Bye bye!"); process.exit(); });

@@ -3,13 +3,13 @@ const https = require('https')
 const axios = require('axios');
 const fs = require('fs');
 const p12 = require('p12-pem')
-const { pemKey } = p12.getPemFromP12('./certs/tpp.p12', 'changeit');
+const { pemKey } = p12.getPemFromP12('./certs/tpp1.p12', 'changeit');
 require('dotenv').config()
 
 const instance = axios.create({
   baseURL: process.env.WSO2_API_BASE_URL,
   httpsAgent: new https.Agent({
-    pfx: fs.readFileSync('certs/tpp.p12'),
+    pfx: fs.readFileSync('certs/tpp1.p12'),
     rejectUnauthorized: false,
     passphrase: "changeit"
   })
